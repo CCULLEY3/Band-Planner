@@ -1,0 +1,41 @@
+/* src/components/GigFormModal.css */
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+
+.form-error {
+  background: rgba(255,74,74,.12); border: 1px solid var(--red);
+  border-radius: var(--radius); padding: 10px 14px;
+  color: var(--red); font-size: 13px; margin-bottom: 16px;
+}
+
+.attachments-section {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px; margin-bottom: 20px;
+}
+.attach-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.section-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text2); font-weight: 500;
+}
+.attach-upload-row { display: flex; gap: 8px; align-items: center; }
+.file-label { cursor: pointer; }
+.attach-empty { font-size: 12px; color: var(--text3); text-align: center; padding: 12px 0; }
+.attach-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; border-top: 1px solid var(--border);
+}
+.attach-icon  { font-size: 18px; }
+.attach-info  { flex: 1; }
+.attach-name  { font-size: 13px; font-weight: 500; }
+.attach-meta  { font-size: 11px; color: var(--text3); margin-top: 1px; }
+
+.modal-actions {
+  display: flex; justify-content: flex-end; gap: 10px;
+  padding-top: 8px; border-top: 1px solid var(--border); margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+}

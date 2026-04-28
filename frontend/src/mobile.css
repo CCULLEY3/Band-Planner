@@ -1,0 +1,203 @@
+/* src/mobile.css
+ * ─────────────────────────────────────────────────────────────────────────────
+ *  Mobile-first overrides for Band Planner.
+ *  Import this after index.css in index.js:
+ *    import './mobile.css';
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+/* ── Touch & scroll fundamentals ── */
+* {
+  /* Smoother scrolling in iOS WebKit */
+  -webkit-overflow-scrolling: touch;
+}
+
+html {
+  /* Prevent layout shifts when soft keyboard opens */
+  height: -webkit-fill-available;
+}
+
+body {
+  /* Use fill-available so full-height works on iOS Safari */
+  min-height: -webkit-fill-available;
+  /* Prevent text size adjustment on orientation change */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Prevent bounce scroll revealing white background */
+  overscroll-behavior: none;
+}
+
+/* ── Safe area padding for full-bleed containers ── */
+/* Extend bg colour behind notch/Dynamic Island */
+.app-shell {
+  padding-top: var(--sat, 0px);
+}
+
+/* Sidebar on desktop — not shown on mobile (display: none via media query) */
+.sidebar {
+  padding-top: calc(20px + var(--sat, 0px));
+}
+
+/* ── Touch target minimum sizes (WCAG 2.5.5) ── */
+@media (max-width: 768px) {
+  button,
+  a,
+  [role="button"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Exceptions: inline text links */
+  p a,
+  .inline-link {
+    min-height: unset;
+    min-width: unset;
+  }
+}
+
+/* ── Remove tap highlight everywhere (we handle our own feedback) ── */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Mobile layout adjustments ── */
+@media (max-width: 768px) {
+
+  /* Hide desktop sidebar */
+  .sidebar-desktop {
+    display: none !important;
+  }
+
+  /* Full-width pages */
+  .app-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Page header — smaller on mobile */
+  .page-header-title {
+    font-size: clamp(28px, 8vw, 38px);
+  }
+
+  /* Cards — full width, reduced padding */
+  .card, .settings-section, .gig-card {
+    border-radius: 10px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Modals — bottom sheet style */
+  .modal-panel {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    border-radius: 20px 20px 0 0 !important;
+    max-height: 92vh !important;
+    overflow-y: auto !important;
+    padding-bottom: var(--sab, 0px) !important;
+    animation: mobileSheetUp 0.35s cubic-bezier(0.34, 1.2, 0.64, 1) !important;
+  }
+
+  @keyframes mobileSheetUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  /* Tables — horizontal scroll instead of truncation */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Form inputs — prevent iOS zoom on focus */
+  input, select, textarea {
+    font-size: 16px !important; /* 16px prevents iOS auto-zoom */
+  }
+
+  /* Analytics charts — reduce padding */
+  .chart-card {
+    padding: 16px 12px;
+  }
+
+  /* Tour map — full height on mobile */
+  .tour-map-container {
+    height: calc(50vh - 64px);
+  }
+
+  /* Member rows in settings — stack on very small screens */
+  .member-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .mr-joined {
+    display: none; /* Hide "last active" on mobile to save space */
+  }
+
+  /* Auth page — single column */
+  .auth-page {
+    grid-template-columns: 1fr !important;
+  }
+
+  .poster-panel {
+    display: none !important;
+  }
+
+  .auth-panel {
+    min-height: 100svh; /* svh = small viewport height — correct for iOS */
+    padding-top: calc(32px + var(--sat, 0px));
+    padding-bottom: calc(32px + var(--sab, 0px));
+  }
+}
+
+/* ── Landscape phone adjustments ── */
+@media (max-width: 896px) and (orientation: landscape) {
+  .mobile-nav {
+    padding-left:  max(var(--sal, 0px), 24px); /* Clear notch in landscape */
+    padding-right: max(var(--sar, 0px), 24px);
+  }
+
+  .auth-panel {
+    padding-top: calc(16px + var(--sat, 0px));
+  }
+
+  .af-title {
+    font-size: 32px;
+  }
+}
+
+/* ── Smooth scroll ── */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ── Disable animations for users who prefer reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Dark mode status bar colour (Android Chrome) ── */
+/* This is handled via <meta name="theme-color"> in index.html */
+
+/* ── Pinch-zoom prevention on the map ── */
+.leaflet-container {
+  touch-action: pan-x pan-y;
+}
+
+/* ── Pull-to-refresh visual ── */
+/* Prevent the native iOS rubber-band/overscroll from revealing bg */
+body {
+  background: var(--bg, #0d0d10);
+}

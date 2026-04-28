@@ -1,0 +1,31 @@
+/* src/components/GigCard.css */
+.gig-card { padding: 14px 16px; transition: all .2s; }
+.gig-card.gig-past { opacity: .55; }
+.gig-card-top { display: flex; align-items: flex-start; gap: 14px; }
+
+.gig-date-chip {
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 10px; min-width: 44px; flex-shrink: 0;
+}
+.gig-month { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); font-weight: 600; }
+.gig-day   { font-family: var(--font-display); font-size: 24px; line-height: 1; }
+
+.gig-main { flex: 1; min-width: 0; }
+.gig-title { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gig-venue { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.gig-tour  { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.gig-meta  { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+.gig-days  { font-size: 11px; color: var(--text3); font-family: var(--font-mono); }
+.gig-days.today { color: var(--accent); font-weight: 600; }
+
+.gig-card-bottom {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text2);
+}
+
+.gig-card-compact { padding: 10px 14px; }
+.gig-card-compact .gig-title { font-size: 13px; }

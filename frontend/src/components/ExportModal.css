@@ -1,0 +1,353 @@
+/* frontend/src/components/ExportModal.css */
+
+/* ── Overlay ── */
+.export-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: overlayIn 0.2s ease;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Modal panel ── */
+.export-modal {
+  background: var(--bg2, #18181c);
+  border: 1px solid var(--border2, #2a2a32);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255,255,255,0.04);
+  animation: modalIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Header ── */
+.export-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px 24px 0;
+}
+
+.export-title {
+  font-family: var(--font-display, 'Bebas Neue', monospace);
+  font-size: 26px;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--text, #f0f0f4);
+}
+
+.export-subtitle {
+  font-size: 12px;
+  color: var(--text3, #5a5a72);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.export-close {
+  background: none;
+  border: none;
+  color: var(--text3, #5a5a72);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: all 0.15s;
+  margin-top: -2px;
+}
+
+.export-close:hover {
+  color: var(--text, #f0f0f4);
+  background: var(--bg3, #222228);
+}
+
+/* ── Sections ── */
+.export-section {
+  padding: 20px 24px 0;
+}
+
+.export-section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text3, #5a5a72);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ── Scope tabs ── */
+.export-scope-tabs {
+  display: flex;
+  gap: 6px;
+}
+
+.scope-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 8px;
+  background: var(--bg3, #222228);
+  border: 1px solid var(--border, #1e1e24);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.18s;
+  color: var(--text2, #9090a8);
+  font-family: var(--font-body, inherit);
+}
+
+.scope-tab:hover {
+  border-color: var(--border2, #2a2a32);
+  color: var(--text, #f0f0f4);
+  transform: translateY(-1px);
+}
+
+.scope-tab.active {
+  background: rgba(240, 82, 42, 0.12);
+  border-color: var(--accent, #f0522a);
+  color: var(--accent, #f0522a);
+}
+
+.scope-tab-icon  { font-size: 18px; line-height: 1; }
+.scope-tab-label { font-size: 12px; font-weight: 600; white-space: nowrap; }
+
+/* ── Tour selector ── */
+.export-tour-select {
+  margin-top: 10px;
+}
+
+.export-tour-select select {
+  width: 100%;
+  background: var(--bg3, #222228);
+  border: 1px solid var(--border2, #2a2a32);
+  border-radius: 8px;
+  color: var(--text, #f0f0f4);
+  padding: 9px 12px;
+  font-size: 13px;
+  font-family: var(--font-body, inherit);
+  cursor: pointer;
+}
+
+.export-tour-select select:focus {
+  outline: none;
+  border-color: var(--accent, #f0522a);
+}
+
+/* ── Preview list ── */
+.export-preview {
+  padding: 20px 24px 0;
+}
+
+.export-event-list {
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid var(--border, #1e1e24);
+  border-radius: 10px;
+  background: var(--bg, #131316);
+}
+
+.export-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+
+.export-spinner {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border2, #2a2a32);
+  border-top-color: var(--accent, #f0522a);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.export-empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--text3, #5a5a72);
+  font-size: 13px;
+}
+
+.export-more {
+  padding: 8px 16px;
+  font-size: 11px;
+  color: var(--text3, #5a5a72);
+  text-align: center;
+  border-top: 1px solid var(--border, #1e1e24);
+  font-style: italic;
+}
+
+/* ── Event row ── */
+.export-event-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border, #1e1e24);
+  animation: rowIn 0.3s ease both;
+  transition: background 0.12s;
+}
+
+.export-event-row:last-child { border-bottom: none; }
+.export-event-row:hover { background: var(--bg2, #18181c); }
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.eer-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.eer-body   { flex: 1; min-width: 0; }
+.eer-title  { font-size: 13px; font-weight: 600; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.eer-meta   { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-size: 11px; color: var(--text3, #5a5a72); }
+.eer-date   { font-family: var(--font-mono, monospace); }
+.eer-time   { color: var(--text2, #9090a8); }
+.eer-sep    { color: var(--border2, #2a2a32); }
+.eer-venue  { color: var(--text2, #9090a8); font-style: italic; }
+.eer-city   { color: var(--text3, #5a5a72); }
+.eer-tour   { font-size: 10px; color: var(--accent, #f0522a); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.06em; }
+.eer-notes-badge { font-size: 13px; flex-shrink: 0; opacity: 0.6; }
+
+/* ── Destination buttons ── */
+.export-destinations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.dest-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--bg3, #222228);
+  border: 1px solid var(--border, #1e1e24);
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-body, inherit);
+  color: var(--text, #f0f0f4);
+}
+
+.dest-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.dest-ical::before  { background: radial-gradient(circle at 30% 50%, rgba(240,82,42,0.08), transparent 60%); }
+.dest-google::before { background: radial-gradient(circle at 30% 50%, rgba(66,133,244,0.08), transparent 60%); }
+
+.dest-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.dest-btn:hover:not(:disabled)::before { opacity: 1; }
+
+.dest-ical:hover:not(:disabled)  { border-color: rgba(240,82,42,0.5); }
+.dest-google:hover:not(:disabled) { border-color: rgba(66,133,244,0.5); }
+
+.dest-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.dest-btn.loading {
+  pointer-events: none;
+}
+
+.dest-btn.done {
+  border-color: var(--green, #29cc6a) !important;
+  background: rgba(41, 204, 106, 0.06) !important;
+}
+
+.dest-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dest-check {
+  font-size: 22px;
+  color: var(--green, #29cc6a);
+  font-weight: 700;
+}
+
+.dest-body  { flex: 1; min-width: 0; }
+.dest-name  { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.dest-sub   { font-size: 11px; color: var(--text3, #5a5a72); line-height: 1.3; }
+
+.done .dest-sub { color: var(--green, #29cc6a); }
+
+.dest-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+/* ── Footer ── */
+.export-footer {
+  padding: 16px 24px 24px;
+  margin-top: 8px;
+}
+
+.export-footer-note {
+  font-size: 11px;
+  color: var(--text3, #5a5a72);
+  line-height: 1.5;
+  padding-top: 12px;
+  border-top: 1px solid var(--border, #1e1e24);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .export-modal        { max-height: 100vh; border-radius: 12px; }
+  .export-destinations { grid-template-columns: 1fr; }
+  .export-scope-tabs   { flex-direction: column; }
+}

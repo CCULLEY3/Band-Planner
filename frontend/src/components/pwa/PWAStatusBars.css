@@ -1,0 +1,143 @@
+/* src/components/pwa/PWAStatusBars.css */
+
+/* ── Offline banner ── */
+.offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 8500;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: #1a1008;
+  border-bottom: 1px solid rgba(240,82,42,0.3);
+  padding: calc(8px + var(--sat, 0px)) 16px 8px;
+
+  font-family: var(--font-mono, 'DM Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(240,82,42,0.9);
+
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+
+.ob-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent, #f0522a);
+  animation: blink 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+/* ── Back online toast ── */
+.back-online-toast {
+  position: fixed;
+  top: calc(16px + var(--sat, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 8600;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: rgba(41, 204, 106, 0.12);
+  border: 1px solid rgba(41, 204, 106, 0.35);
+  border-radius: 24px;
+  padding: 8px 18px;
+
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  color: #29cc6a;
+  white-space: nowrap;
+
+  animation: toastIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+             toastOut 0.4s ease 3.6s forwards;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) scale(0.85); }
+  to   { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateX(-50%) scale(1); }
+  to   { opacity: 0; transform: translateX(-50%) scale(0.9) translateY(-8px); }
+}
+
+.bot-icon {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ── Update banner ── */
+.update-banner {
+  position: fixed;
+  bottom: calc(72px + var(--sab, 0px));
+  left: 12px;
+  right: 12px;
+  z-index: 8400;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+
+  background: rgba(74, 140, 255, 0.08);
+  border: 1px solid rgba(74, 140, 255, 0.3);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+
+  font-size: 13px;
+  color: var(--text, #f0f0f4);
+
+  animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ub-icon {
+  font-size: 16px;
+  color: #4a8cff;
+  flex-shrink: 0;
+}
+
+.ub-text {
+  flex: 1;
+  font-size: 13px;
+}
+
+.ub-btn {
+  background: #4a8cff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+
+.ub-btn:active { opacity: 0.8; }

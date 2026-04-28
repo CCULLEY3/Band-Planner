@@ -1,0 +1,36 @@
+{
+  "name": "band-planner-client",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Band Planner frontend — React app for managing gigs, tours, and band operations",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start":   "react-scripts start",
+    "build":   "react-scripts build",
+    "test":    "react-scripts test --watchAll=false",
+    "eject":   "react-scripts eject"
+  },
+  "dependencies": {
+    "react":            "^18.2.0",
+    "react-dom":        "^18.2.0",
+    "react-router-dom": "^6.22.0",
+    "react-scripts":    "5.0.1",
+    "axios":            "^1.6.7",
+    "date-fns":         "^3.3.1",
+    "leaflet":          "^1.9.4",
+    "react-leaflet":    "^4.2.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom":   "^6.4.2",
+    "@testing-library/react":      "^15.0.7",
+    "@testing-library/user-event": "^14.5.2"
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+  },
+  "proxy": "http://localhost:4000",
+  "homepage": "."
+}

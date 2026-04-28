@@ -1,0 +1,305 @@
+/* src/components/pwa/InstallBanner.css */
+
+/* ── Install banner ── */
+.install-banner {
+  position: fixed;
+  bottom: calc(64px + var(--sab, 0px)); /* sit above the mobile nav bar */
+  left: 12px;
+  right: 12px;
+  z-index: 7000;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px 14px 16px;
+
+  background: var(--bg2, #18181c);
+  border: 1px solid rgba(240, 82, 42, 0.4);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(240,82,42,0.08);
+
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.3s ease;
+
+  /* Respect home indicator on iOS */
+  padding-bottom: max(14px, var(--sab, 0px));
+}
+
+.install-banner.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.ib-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.ib-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.ib-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text, #f0f0f4);
+  margin-bottom: 2px;
+}
+
+.ib-sub {
+  font-size: 11px;
+  color: var(--text3, #5a5a72);
+  font-family: var(--font-mono, 'DM Mono', monospace);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ib-install-btn {
+  background: var(--accent, #f0522a);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+
+.ib-install-btn:active { opacity: 0.8; }
+
+.ib-dismiss {
+  background: none;
+  border: none;
+  color: var(--text3, #5a5a72);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 6px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.ib-dismiss:active { color: var(--text, #f0f0f4); }
+
+/* ── iOS install guide ── */
+.ios-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.ios-sheet {
+  background: var(--bg2, #18181c);
+  border-radius: 20px 20px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 0 24px calc(24px + var(--sab, 0px));
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: sheetUp 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+@keyframes sheetUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.ios-handle {
+  width: 36px;
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+  margin: 14px auto 24px;
+}
+
+.ios-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.ios-icon {
+  font-size: 40px;
+  width: 56px;
+  height: 56px;
+  background: var(--bg3, #222228);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ios-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text, #f0f0f4);
+  margin-bottom: 3px;
+}
+
+.ios-sub {
+  font-size: 12px;
+  color: var(--text3, #5a5a72);
+  font-family: var(--font-mono, monospace);
+}
+
+/* Steps */
+.ios-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 28px;
+}
+
+.ios-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 0;
+}
+
+.ios-step-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 0 40px;
+}
+
+.ios-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent, #f0522a);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.ios-step-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text, #f0f0f4);
+  margin-bottom: 5px;
+}
+
+.ios-step-hint {
+  font-size: 12px;
+  color: var(--text3, #5a5a72);
+  line-height: 1.5;
+  font-family: var(--font-mono, monospace);
+}
+
+.ios-icon-inline {
+  font-style: normal;
+  color: var(--accent, #f0522a);
+  font-weight: 700;
+}
+
+.ios-step-highlight {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text, #f0f0f4);
+  background: rgba(240, 82, 42, 0.1);
+  border: 1px solid rgba(240, 82, 42, 0.25);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 4px;
+}
+
+/* Feature pills */
+.ios-features {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.ios-feature {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text3, #5a5a72);
+  background: var(--bg3, #222228);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-family: var(--font-mono, monospace);
+}
+
+.ios-feature span { font-size: 13px; }
+
+.ios-close-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--bg3, #222228);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  color: var(--text3, #5a5a72);
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ios-close-btn:active {
+  background: rgba(255,255,255,0.06);
+}
+
+/* Arrow pointing at Safari share button (shown briefly) */
+.ios-arrow-hint {
+  display: none; /* Only shown on actual iOS Safari */
+}
+
+@supports (-webkit-touch-callout: none) {
+  .ios-arrow-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    bottom: calc(var(--sab, 20px) + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9001;
+    animation: bounce 1s ease infinite;
+    pointer-events: none;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(6px); }
+  }
+
+  .ios-arrow-label {
+    font-size: 11px;
+    color: var(--accent, #f0522a);
+    font-family: var(--font-mono, monospace);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    background: rgba(0,0,0,0.7);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .ios-arrow {
+    font-size: 20px;
+    color: var(--accent, #f0522a);
+  }
+}
