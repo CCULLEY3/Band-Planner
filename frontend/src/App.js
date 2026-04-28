@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, Routes, Route, NavLink, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { AppProvider } from './context/AppContext';
 import { ProtectedRoute, RoleRoute, UnauthorizedPage } from './components/auth/ProtectedRoute';
 
 // Pages
@@ -201,10 +202,10 @@ function AppRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
+      <AuthProvider><AppProvider>
         <InstallBanner />
         <AppRoutes />
-      </AuthProvider>
+      </AppProvider></AuthProvider>
     </BrowserRouter>
   );
 }
